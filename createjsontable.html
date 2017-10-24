@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>JSON TABLE</h2>
+    <p id="demo"></p>
+    <script>
+    var obj, dbParam, xmlhttp, myObj, x, txt = "";
+    obj = { "posts": "id", "limit": 5 };
+    dbParam = JSON.stringify(obj);
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            myObj = JSON.parse(this.responseText);
+            txt += "<table border='1'> <th>userId</th> <th>Id</th> <th>title</th>  <th>Body</th>"
+            for (x in myObj) {
+                  txt += "<tr><td>" + myObj[x].userId + "</td> <td>" + myObj[x].id + "</td> <td>" + myObj[x].title + "</td> <td>" + myObj[x].body + "</td></tr>"
+                // txt += "<tr><td>" + myObj[x]+ "</td> <td>" +myObj[x]+"</td> <td>" +myObj[x]+"</td> <td>" +myObj[x]+"</td></tr>"
+                console.log(txt);
+
+            }
+            txt += "</table>"
+
+            document.getElementById("demo").innerHTML = txt;
+
+        }
+    };
+    xmlhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+    //xmlhttp.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+    xmlhttp.send("x=" + dbParam);
+    </script>
+</body>
+
+</html>
